@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:utopic
 MAINTAINER Emmanuel COQUELIN <ecoquelin@esensconsulting.com>
 
 # Set Installation variables
@@ -6,16 +6,17 @@ ENV KIBANA_VER 4.0.2
 
 # Dependencies
 RUN apt-get update -qq
-RUN sudo apt-get install -y -qq nginx-full wget vim
+RUN sudo apt-get install -y -qq wget nginx-full apache2-utils supervisor
 
 # Kibana
 WORKDIR /opt
 RUN wget --no-check-certificate -O- "https://download.elastic.co/kibana/kibana/kibana-$KIBANA_VER-linux-x64.tar.gz" | tar zvxf -
+RUN mv kibana-$KIBANA_VER-linux-x64 kibana
 RUN mkdir /etc/kibana # This is where the htpasswd file is placed by the run scrip
 
 ADD kibana /etc/nginx/sites-available/kibana
 ADD kibana-secure /etc/nginx/sites-available/kibana-secure
-RUN rm /etc/ngix/sites-enabled/*
+RUN rm /etc/nginx/sites-enabled/*
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 ENV KIBANA_SECURE true

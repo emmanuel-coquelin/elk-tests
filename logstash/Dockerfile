@@ -1,4 +1,5 @@
-FROM ubuntu:14.04
+FROM ubuntu:utopic
+MAINTAINER Emmanuel COQUELIN <ecoquelin@esensconsulting.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LOGSTASH_VER 1.5.0-rc3
