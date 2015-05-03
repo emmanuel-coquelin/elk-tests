@@ -1,0 +1,9 @@
+http.cors.allow-origin: "/.*/"
+http.cors.enabled: true
+cluster.name: elasticsearch
+node.name: "localhost"
+path:
+ data: /data/elasticsearch/index
+ logs: /data/elasticsearch/log
+ plugins: /data/elasticsearch/plugins
+ work: /data/elasticsearch/work
